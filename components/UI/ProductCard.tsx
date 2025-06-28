@@ -41,16 +41,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div 
-      className="group relative bg-white rounded-2xl overflow-hidden shadow-elegant hover:shadow-elegant-hover smooth-transition"
+      className="group relative bg-white rounded-2xl md:rounded-3xl overflow-hidden soft-shadow hover:shadow-lg smooth-transition card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Product Image */}
-      <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden">
+      <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden rounded-t-2xl md:rounded-t-3xl">
         {/* Placeholder Image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-          <div className="text-center text-gray-500">
-            <svg className="w-16 h-16 mx-auto mb-2 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+          <div className="text-center text-gray-600">
+            <svg className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 opacity-50" fill="currentColor" viewBox="0 0 24 24">
               <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
             </svg>
             <p className="text-xs font-medium">{product.name}</p>
@@ -58,14 +58,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute top-3 left-3 md:top-4 md:left-4 flex flex-col gap-2">
           {product.isNew && (
-            <span className="bg-accent text-white text-xs font-medium px-2 py-1 rounded-full">
-              New
+            <span className="bg-black text-white text-xs font-medium px-2 md:px-3 py-1 rounded-full">
+              ✨ New
             </span>
           )}
           {product.isSale && discountPercentage > 0 && (
-            <span className="bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+            <span className="bg-gray-800 text-white text-xs font-medium px-2 md:px-3 py-1 rounded-full">
               -{discountPercentage}%
             </span>
           )}
@@ -75,50 +75,48 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <button
           onClick={handleWishlistClick}
           className={`
-            absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center smooth-transition
+            absolute top-3 right-3 md:top-4 md:right-4 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center smooth-transition soft-shadow
             ${isWishlisted 
-              ? 'bg-accent text-white' 
-              : 'bg-white/80 text-gray-600 hover:bg-white hover:text-accent'
+              ? 'bg-black text-white' 
+              : 'bg-white/90 text-gray-600 hover:bg-white hover:text-black'
             }
             ${isHovered ? 'opacity-100' : 'opacity-0'}
           `}
         >
-          <svg className="w-4 h-4" fill={isWishlisted ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 md:w-5 md:h-5" fill={isWishlisted ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
         </button>
 
         {/* Quick View Button */}
         <div className={`
-          absolute inset-0 bg-black/20 flex items-center justify-center smooth-transition
+          absolute inset-0 bg-black/10 flex items-center justify-center smooth-transition
           ${isHovered ? 'opacity-100' : 'opacity-0'}
         `}>
-          <Button
-            variant="secondary"
-            size="sm"
+          <button
             onClick={() => onQuickView?.(product.id)}
-            className="backdrop-blur-sm"
+            className="px-4 md:px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 smooth-transition font-medium soft-shadow text-sm md:text-base"
           >
             Quick View
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-4 md:p-6">
         {/* Category */}
-        <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+        <p className="text-xs text-gray-600 uppercase tracking-wide mb-2">
           {product.category}
         </p>
 
         {/* Product Name */}
-        <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 group-hover:text-accent smooth-transition">
+        <h3 className="font-medium text-black mb-3 line-clamp-2 group-hover:text-gray-700 smooth-transition text-sm md:text-base">
           {product.name}
         </h3>
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg font-semibold text-primary">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-base md:text-lg font-semibold text-black">
             ${product.price.toFixed(2)}
           </span>
           {product.originalPrice && (
@@ -129,21 +127,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Add to Cart Button */}
-        <Button
-          variant="outline"
-          size="sm"
-          fullWidth
+        <button
           onClick={() => onAddToCart?.(product.id)}
           className={`
-            smooth-transition
+            w-full py-2 md:py-3 rounded-full font-medium smooth-transition text-sm md:text-base
             ${isHovered 
-              ? 'border-accent text-accent hover:bg-accent hover:text-white' 
-              : 'border-gray-300 text-gray-600'
+              ? 'bg-black text-white hover:bg-gray-800' 
+              : 'bg-gray-100 text-black hover:bg-gray-200'
             }
           `}
         >
           Add to Cart
-        </Button>
+        </button>
       </div>
     </div>
   );

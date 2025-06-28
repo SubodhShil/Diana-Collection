@@ -13,159 +13,128 @@ interface Category {
 }
 
 const CategoryGrid = () => {
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-
-  const categories: Category[] = [
+  const categories = [
     {
-      id: 'baby-kids',
-      name: 'Baby & Kids',
-      description: 'Premium essentials for little ones',
-      href: '/baby-kids',
+      id: 1,
+      name: 'New Arrivals',
+      description: 'Fresh styles for the season',
+      itemCount: '50+ new items',
       featured: true,
+      bgColor: 'bg-black',
+      emoji: '✨',
     },
     {
-      id: 'women',
+      id: 2,
+      name: 'Baby & Kids',
+      description: 'Gentle essentials for little ones',
+      itemCount: '200+ items',
+      featured: false,
+      bgColor: 'bg-gray-800',
+      emoji: '👶',
+    },
+    {
+      id: 3,
       name: 'Women',
-      description: 'Sophisticated styles for modern mothers',
-      href: '/women',
+      description: 'Elegant styles for modern mothers',
+      itemCount: '150+ items',
       featured: false,
+      bgColor: 'bg-gray-700',
+      emoji: '👩',
     },
     {
-      id: 'men',
+      id: 4,
       name: 'Men',
-      description: 'Refined fashion for contemporary fathers',
-      href: '/men',
+      description: 'Sophisticated comfort for fathers',
+      itemCount: '120+ items',
       featured: false,
+      bgColor: 'bg-gray-600',
+      emoji: '👨',
     },
     {
-      id: 'accessories',
+      id: 5,
       name: 'Accessories',
-      description: 'Curated pieces to complete every look',
-      href: '/accessories',
+      description: 'Perfect finishing touches',
+      itemCount: '80+ items',
       featured: false,
+      bgColor: 'bg-gray-500',
+      emoji: '👜',
+    },
+    {
+      id: 6,
+      name: 'Best Sellers',
+      description: 'Customer favorites',
+      itemCount: '30+ top picks',
+      featured: false,
+      bgColor: 'bg-gray-900',
+      emoji: '⭐',
     },
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 md:py-20 bg-gray-50">
+      <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="heading-font text-3xl md:text-4xl font-light text-primary mb-4">
-            Discover Our
-            <span className="brand-text gold-accent font-semibold"> Collections</span>
+        <div className="text-center mb-12 md:mb-16 mobile-px-4">
+          <h2 className="text-responsive-3xl font-semibold text-black mb-4">
+            Shop by Category
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            From precious first moments to timeless family memories, 
-            explore our carefully curated categories designed for every stage of life.
+          <p className="text-responsive-lg text-gray-600 max-w-2xl mx-auto">
+            Discover our thoughtfully curated collections designed for every member of your family
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category) => (
-            <Link
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mobile-px-4">
+          {categories.map((category, index) => (
+            <div
               key={category.id}
-              href={category.href}
-              className="group block"
-              onMouseEnter={() => setHoveredCategory(category.id)}
-              onMouseLeave={() => setHoveredCategory(null)}
+              className={`group relative overflow-hidden rounded-2xl md:rounded-3xl soft-shadow smooth-transition cursor-pointer hover:scale-105 ${
+                category.featured
+                  ? 'lg:col-span-2 lg:row-span-1'
+                  : ''
+              } ${category.bgColor}`}
             >
-              <div className={`
-                relative overflow-hidden rounded-2xl smooth-transition
-                ${category.featured 
-                  ? 'md:col-span-2 lg:col-span-2 h-80' 
-                  : 'h-64'
-                }
-                ${hoveredCategory === category.id 
-                  ? 'shadow-elegant-hover transform -translate-y-1' 
-                  : 'shadow-elegant'
-                }
-              `}>
-                {/* Background */}
-                <div className={`
-                  absolute inset-0 bg-gradient-to-br smooth-transition
-                  ${category.featured
-                    ? 'from-accent/10 to-accent/20'
-                    : 'from-gray-100 to-gray-200'
-                  }
-                  ${hoveredCategory === category.id ? 'scale-105' : 'scale-100'}
-                `}>
-                  {/* Pattern Overlay */}
-                  <div className="absolute inset-0 opacity-5">
-                    <div className="absolute top-4 right-4 w-16 h-16 border border-accent rounded-full"></div>
-                    <div className="absolute bottom-4 left-4 w-12 h-12 border border-accent rounded-full"></div>
-                  </div>
+              <div className={`p-6 md:p-8 h-full flex flex-col justify-between text-white ${
+                category.featured ? 'min-h-[250px] md:min-h-[300px]' : 'min-h-[200px] md:min-h-[250px]'
+              }`}>
+                {/* Emoji Icon */}
+                <div className="mb-4 md:mb-6">
+                  <span className="text-3xl md:text-4xl">{category.emoji}</span>
                 </div>
 
                 {/* Content */}
-                <div className="relative h-full flex flex-col justify-end p-6">
-                  {/* Category Icon */}
-                  <div className="mb-4">
-                    <div className={`
-                      w-12 h-12 rounded-full flex items-center justify-center smooth-transition
-                      ${category.featured 
-                        ? 'gold-accent-bg' 
-                        : 'bg-white shadow-md'
-                      }
-                      ${hoveredCategory === category.id ? 'scale-110' : 'scale-100'}
-                    `}>
-                      {category.id === 'baby-kids' && (
-                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                        </svg>
-                      )}
-                      {category.id === 'women' && (
-                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-                        </svg>
-                      )}
-                      {category.id === 'men' && (
-                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm8 7h-6v12h-4v-7h-4v7H2V9h6V7h12v2z"/>
-                        </svg>
-                      )}
-                      {category.id === 'accessories' && (
-                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                      )}
-                    </div>
-                  </div>
+                <div className="flex-1">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-2 md:mb-3 text-white">
+                    {category.name}
+                  </h3>
+                  <p className="text-sm md:text-base mb-3 md:mb-4 text-white/90">
+                    {category.description}
+                  </p>
+                  <p className="text-xs md:text-sm font-medium text-white/80">
+                    {category.itemCount}
+                  </p>
+                </div>
 
-                  {/* Text Content */}
-                  <div>
-                    <h3 className={`
-                      font-semibold mb-2 smooth-transition
-                      ${category.featured 
-                        ? 'text-2xl text-primary' 
-                        : 'text-xl text-primary'
-                      }
-                      ${hoveredCategory === category.id ? 'gold-accent' : ''}
-                    `}>
-                      {category.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {category.description}
-                    </p>
-                  </div>
-
-                  {/* Hover Arrow */}
-                  <div className={`
-                    absolute top-6 right-6 smooth-transition
-                    ${hoveredCategory === category.id 
-                      ? 'opacity-100 transform translate-x-0' 
-                      : 'opacity-0 transform translate-x-2'
-                    }
-                  `}>
-                    <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
+                {/* Arrow */}
+                <div className="mt-4 md:mt-6 transform group-hover:translate-x-2 smooth-transition text-white">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </div>
               </div>
-            </Link>
+
+              {/* Overlay shapes */}
+              <div className="absolute top-3 right-3 md:top-4 md:right-4 w-16 h-16 md:w-20 md:h-20 bg-white/10 rounded-full"></div>
+              <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 w-8 h-8 md:w-12 md:h-12 bg-white/5 rounded-full"></div>
+            </div>
           ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-8 md:mt-12 mobile-px-4">
+          <button className="btn-primary rounded-full px-6 md:px-8 py-3">
+            View All Collections
+          </button>
         </div>
       </div>
     </section>

@@ -109,29 +109,33 @@ const NewArrivals = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="heading-font text-3xl md:text-4xl font-light text-primary mb-4">
-            New
-            <span className="brand-text gold-accent font-semibold"> Arrivals</span>
+        <div className="text-center mb-12 md:mb-16">
+          <div className="mb-4">
+            <span className="inline-block px-4 py-2 bg-black text-white rounded-full text-sm font-medium mb-4">
+              ✨ Fresh Arrivals
+            </span>
+          </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-black mb-4">
+            Best Sellers
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Discover our latest curated pieces, thoughtfully selected for 
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-6 md:mb-8">
+            Discover our most loved pieces, carefully curated for 
             their exceptional quality and timeless appeal.
           </p>
 
           {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-6 md:mb-8">
             {filters.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
                 className={`
-                  px-6 py-2 rounded-full text-sm font-medium smooth-transition
+                  px-4 md:px-6 py-2 md:py-3 rounded-full text-sm font-medium smooth-transition soft-shadow
                   ${activeFilter === filter.id
-                    ? 'gold-accent-bg text-primary'
+                    ? 'bg-black text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-100'
                   }
                 `}
@@ -143,7 +147,7 @@ const NewArrivals = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-12 md:mb-16">
           {filteredProducts.slice(0, 8).map((product) => (
             <ProductCard
               key={product.id}
@@ -156,29 +160,31 @@ const NewArrivals = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center">
-          <Button variant="outline" size="lg">
-            View All New Arrivals
-          </Button>
+        <div className="text-center mb-12 md:mb-16">
+          <button className="btn-primary px-6 md:px-8 py-2 md:py-3 text-sm md:text-base">
+            View All Products →
+          </button>
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">500+</div>
-            <div className="text-sm text-gray-600">Premium Products</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">50+</div>
-            <div className="text-sm text-gray-600">Luxury Brands</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">10K+</div>
-            <div className="text-sm text-gray-600">Happy Families</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">★ 4.9</div>
-            <div className="text-sm text-gray-600">Customer Rating</div>
+        <div className="bg-gray-100 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">500+</div>
+              <div className="text-xs md:text-sm text-gray-600">Premium Products</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">50+</div>
+              <div className="text-xs md:text-sm text-gray-600">Luxury Brands</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">10K+</div>
+              <div className="text-xs md:text-sm text-gray-600">Happy Families</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">★ 4.9</div>
+              <div className="text-xs md:text-sm text-gray-600">Customer Rating</div>
+            </div>
           </div>
         </div>
       </div>

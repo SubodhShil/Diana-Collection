@@ -92,14 +92,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="py-12 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
             {/* Brand Section */}
             <div className="lg:col-span-1">
-              <Link href="/" className="brand-text text-2xl font-semibold text-white hover:text-accent smooth-transition">
+              <Link href="/" className="text-xl md:text-2xl font-semibold text-white hover:text-gray-300 smooth-transition">
                 Diana Collection
               </Link>
               <p className="mt-4 text-gray-300 text-sm leading-relaxed">
@@ -115,7 +115,7 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-accent smooth-transition"
+                    className="text-gray-400 hover:text-white smooth-transition"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -133,7 +133,7 @@ const Footer = () => {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-gray-300 hover:text-accent smooth-transition text-sm"
+                        className="text-gray-300 hover:text-white smooth-transition text-sm"
                       >
                         {link.name}
                       </Link>
@@ -146,23 +146,23 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="border-t border-gray-700 py-8">
+        <div className="border-t border-gray-700 py-6 md:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-base md:text-lg font-semibold text-white mb-2">
                 Stay Connected
               </h3>
               <p className="text-gray-300 text-sm">
                 Subscribe to receive exclusive offers and style updates
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <input
                 type="email"
                 placeholder="Your email address"
-                className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-accent smooth-transition"
+                className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-white smooth-transition"
               />
-              <button className="px-6 py-2 gold-accent-bg text-primary rounded-full font-medium hover:bg-accent-dark smooth-transition">
+              <button className="btn-primary px-4 md:px-6 py-2 text-sm md:text-base">
                 Subscribe
               </button>
             </div>
@@ -175,17 +175,17 @@ const Footer = () => {
             <div className="mb-4 md:mb-0">
               <p>&copy; {currentYear} Diana Collection. All rights reserved.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-6">
-              <Link href="/privacy" className="hover:text-accent smooth-transition">
+            <div className="flex flex-wrap items-center gap-4 md:gap-6">
+              <Link href="/privacy" className="hover:text-white smooth-transition">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-accent smooth-transition">
+              <Link href="/terms" className="hover:text-white smooth-transition">
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="hover:text-accent smooth-transition">
+              <Link href="/cookies" className="hover:text-white smooth-transition">
                 Cookie Policy
               </Link>
-              <Link href="/accessibility" className="hover:text-accent smooth-transition">
+              <Link href="/accessibility" className="hover:text-white smooth-transition">
                 Accessibility
               </Link>
             </div>
@@ -194,7 +194,7 @@ const Footer = () => {
 
         {/* Trust Badges */}
         <div className="border-t border-gray-700 py-6">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-xs text-gray-500">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-xs text-gray-500">
             <div className="flex items-center">
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />

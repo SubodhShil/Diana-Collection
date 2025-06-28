@@ -17,23 +17,23 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white shadow-elegant sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+    <header className="bg-white shadow-elegant sticky top-0 z-50 border-b border-gray-200">
+      <div className="container">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="brand-text text-2xl font-semibold text-primary hover:text-accent smooth-transition">
+            <Link href="/" className="text-xl md:text-2xl font-semibold text-black hover:text-gray-600 smooth-transition">
               Diana Collection
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-6 lg:space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-800 hover:text-accent smooth-transition font-medium text-sm tracking-wide"
+                className="text-black hover:text-gray-600 smooth-transition font-medium text-sm tracking-wide"
               >
                 {item.name}
               </Link>
@@ -41,34 +41,34 @@ const Header = () => {
           </nav>
 
           {/* Search and Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 md:space-x-4">
             <div className="hidden lg:block">
               <SearchBar />
             </div>
             
             {/* Wishlist */}
-            <button className="p-2 text-gray-800 hover:text-accent smooth-transition">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="p-2 text-black hover:text-gray-600 smooth-transition">
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
 
             {/* Cart */}
-            <button className="p-2 text-gray-800 hover:text-accent smooth-transition relative">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="p-2 text-black hover:text-gray-600 smooth-transition relative">
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 7H6L5 9z" />
               </svg>
-              <span className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 md:h-5 md:w-5 flex items-center justify-center font-medium">
                 0
               </span>
             </button>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 text-gray-800 hover:text-accent smooth-transition"
+              className="md:hidden p-2 text-black hover:text-gray-600 smooth-transition"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -82,15 +82,15 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="mb-4">
+            <div className="mb-4 lg:hidden">
               <SearchBar />
             </div>
-            <nav className="space-y-2">
+            <nav className="space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-gray-800 hover:text-accent hover:bg-gray-50 smooth-transition font-medium"
+                  className="block px-3 py-3 text-black hover:text-gray-600 hover:bg-gray-50 smooth-transition font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}

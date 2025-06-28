@@ -65,15 +65,19 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-beige-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
+          <div className="mb-4">
+            <span className="inline-block px-4 py-2 bg-sage text-white rounded-full text-sm font-medium mb-4">
+              🌟 Why Choose Us
+            </span>
+          </div>
           <h2 className="heading-font text-3xl md:text-4xl font-light text-primary mb-4">
-            Why Choose
-            <span className="brand-text gold-accent font-semibold"> Diana Collection</span>
+            Trusted by Families
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-warm max-w-2xl mx-auto">
             We believe in creating more than just clothing – we craft experiences 
             that celebrate the beauty of family life.
           </p>
@@ -83,13 +87,13 @@ const TrustSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {trustFeatures.map((feature, index) => (
             <div key={index} className="text-center group">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gold-accent-bg text-primary mb-4 group-hover:scale-110 smooth-transition">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white text-accent mb-6 group-hover:scale-110 smooth-transition soft-shadow">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold text-primary mb-3">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-warm leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -97,20 +101,19 @@ const TrustSection = () => {
         </div>
 
         {/* Testimonials */}
-        <div className="bg-cream rounded-3xl p-8 md:p-12">
+        <div className="bg-white rounded-3xl p-8 md:p-12 soft-shadow">
           <div className="text-center mb-12">
             <h3 className="heading-font text-2xl md:text-3xl font-light text-primary mb-4">
-              What Our
-              <span className="brand-text gold-accent font-semibold"> Families Say</span>
+              What Our Families Say
             </h3>
-            <p className="text-gray-600">
+            <p className="text-warm">
               Real stories from parents who trust Diana Collection
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-elegant">
+              <div key={testimonial.id} className="bg-secondary rounded-3xl p-6 soft-shadow">
                 {/* Stars */}
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -121,13 +124,13 @@ const TrustSection = () => {
                 </div>
 
                 {/* Content */}
-                <p className="text-gray-700 mb-6 leading-relaxed italic">
+                <p className="text-primary mb-6 leading-relaxed italic">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center mr-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/20 to-sage/30 flex items-center justify-center mr-4">
                     <span className="text-accent font-semibold text-lg">
                       {testimonial.name.charAt(0)}
                     </span>
@@ -136,7 +139,7 @@ const TrustSection = () => {
                     <div className="font-semibold text-primary">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-warm">
                       {testimonial.role}
                     </div>
                   </div>
@@ -147,18 +150,18 @@ const TrustSection = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="mt-16 flex flex-wrap justify-center items-center gap-8 opacity-60">
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600">CERTIFIED ORGANIC</div>
+        <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
+          <div className="text-center px-4 py-2 bg-white rounded-full soft-shadow">
+            <div className="text-sm font-medium text-sage">🌱 CERTIFIED ORGANIC</div>
           </div>
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600">SUSTAINABLE FASHION</div>
+          <div className="text-center px-4 py-2 bg-white rounded-full soft-shadow">
+            <div className="text-sm font-medium text-sage">♻️ SUSTAINABLE FASHION</div>
           </div>
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600">ETHICALLY MADE</div>
+          <div className="text-center px-4 py-2 bg-white rounded-full soft-shadow">
+            <div className="text-sm font-medium text-sage">🤝 ETHICALLY MADE</div>
           </div>
-          <div className="text-center">
-            <div className="text-sm font-medium text-gray-600">PREMIUM QUALITY</div>
+          <div className="text-center px-4 py-2 bg-white rounded-full soft-shadow">
+            <div className="text-sm font-medium text-sage">⭐ PREMIUM QUALITY</div>
           </div>
         </div>
       </div>
