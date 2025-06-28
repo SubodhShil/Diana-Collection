@@ -1,0 +1,62 @@
+'use client';
+
+import { useState } from 'react';
+
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+    console.log('Searching for:', searchQuery);
+  };
+
+  return (
+    <form onSubmit={handleSearch} className="relative">
+      <div className={`relative flex items-center border rounded-full smooth-transition ${
+        isFocused ? 'border-accent shadow-md' : 'border-gray-300'
+      }`}>
+        <input
+          type="text"
+          placeholder="Search collections..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className="w-full px-4 py-2 pl-10 pr-4 text-sm bg-transparent border-none rounded-full focus:outline-none placeholder-gray-500"
+        />
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+          <svg 
+            className={`w-4 h-4 smooth-transition ${
+              isFocused ? 'text-accent' : 'text-gray-400'
+            }`} 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+            />
+          </svg>
+        </div>
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={() => setSearchQuery('')}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 smooth-transition"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+      </div>
+    </form>
+  );
+};
+
+export default SearchBar;

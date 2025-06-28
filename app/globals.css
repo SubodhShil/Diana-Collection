@@ -1,17 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary: #1A1A1A;        /* Rich black */
+  --secondary: #FFFFFF;      /* Pure white */
+  --accent: #D4AF37;         /* Elegant gold */
+  --accent-dark: #B8860B;    /* Darker gold */
+  --gray-100: #F8F9FA;       /* Light gray backgrounds */
+  --gray-200: #E9ECEF;       /* Border colors */
+  --gray-300: #CED4DA;       /* Subtle borders */
+  --gray-600: #6C757D;       /* Muted text */
+  --gray-800: #343A40;       /* Secondary text */
+  --cream: #FEFCF7;          /* Warm off-white */
+  
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-brand: 'Crimson Text', serif;
 }
 
 html,
@@ -21,11 +28,12 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--primary);
+  background: var(--secondary);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 * {
@@ -39,8 +47,32 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.brand-text {
+  font-family: var(--font-brand);
+}
+
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gold-accent {
+  color: var(--accent);
+}
+
+.gold-accent-bg {
+  background-color: var(--accent);
+}
+
+.shadow-elegant {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-elegant-hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
