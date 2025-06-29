@@ -1,22 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, User, ShoppingBag, Menu, Plus } from 'lucide-react';
-import SearchBar from '@/components/UI/SearchBar';
+import { useMenu } from '@/app/layout';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Baby & Kids', href: '/baby-kids' },
-    { name: 'Women', href: '/women' },
-    { name: 'Men', href: '/men' },
-    { name: 'Accessories', href: '/accessories' },
-    { name: 'About', href: '/about' },
-  ];
+  const { toggleMenu } = useMenu();
 
   return (
     <header className="bg-white sticky top-3 z-50">
@@ -52,7 +42,7 @@ const Header = () => {
               <Search size={24} />
             </Link>
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleMenu}
               className="flex items-center space-x-2"
             >
               <Menu size={24} />
@@ -61,27 +51,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="mb-4 lg:hidden">
-              <SearchBar />
-            </div>
-            <nav className="space-y-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-3 text-black hover:text-gray-600 hover:bg-gray-50 smooth-transition font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
     </header>
   );
 };

@@ -1,13 +1,30 @@
 'use client';
 
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import { Sulphur_Point, Hubot_Sans, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import MobileTopNav from "@/components/Layout/MobileTopNav";
 import MobileBottomNav from "@/components/Layout/MobileBottomNav";
-import MobileMenu from "@/components/Layout/MobileMenu";
+import UnifiedMenu from "@/components/Layout/UnifiedMenu";
+
+// Create context for menu state
+interface MenuContextType {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+  closeMenu: () => void;
+}
+
+const MenuContext = createContext<MenuContextType | undefined>(undefined);
+
+export const useMenu = () => {
+  const context = useContext(MenuContext);
+  if (context === undefined) {
+    throw new Error('useMenu must be used within a MenuProvider');
+  }
+  return context;
+};
 
 const sulphurPoint = Sulphur_Point({
   subsets: ['latin'],
@@ -32,43 +49,51 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const menuContextValue = {
+    isMenuOpen,
+    toggleMenu,
+    closeMenu,
   };
 
   return (
     <html lang="en">
       <body className={hubotSans.className}>
-        {/* Desktop Layout */}
-        <div className="hidden lg:block">
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </div>
+        <MenuContext.Provider value={menuContextValue}>
+          {/* Desktop Layout */}
+          <div className="hidden lg:block">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
 
-        {/* Mobile Layout */}
-        <div className="lg:hidden">
-          <MobileTopNav />
-          
-          {/* Main Content with proper spacing */}
-          <main className="pt-14 pb-16 min-h-screen bg-gray-50">
-            {children}
-          </main>
-          
-          <MobileBottomNav onMenuToggle={toggleMobileMenu} />
-          
-          {/* Mobile Menu Overlay */}
-          <MobileMenu 
-            isOpen={isMobileMenuOpen} 
-            onClose={closeMobileMenu} 
+          {/* Mobile Layout */}
+          <div className="lg:hidden">
+            <MobileTopNav />
+            
+            {/* Main Content with proper spacing */}
+            <main className="pt-14 pb-16 min-h-screen bg-gray-50">
+              {children}
+            </main>
+            
+            <MobileBottomNav onMenuToggle={toggleMenu} />
+          </div>
+
+          {/* Unified Menu - Works on all screen sizes */}
+          <UnifiedMenu 
+            isOpen={isMenuOpen} 
+            onClose={closeMenu} 
           />
-        </div>
+        </MenuContext.Provider>
       </body>
     </html>
   );
