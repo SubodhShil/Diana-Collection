@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { DM_Sans } from "next/font/google";
+import { Sulphur_Point, Hubot_Sans, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
@@ -9,12 +9,23 @@ import MobileTopNav from "@/components/Layout/MobileTopNav";
 import MobileBottomNav from "@/components/Layout/MobileBottomNav";
 import MobileMenu from "@/components/Layout/MobileMenu";
 
-const dmSans = DM_Sans({
+const sulphurPoint = Sulphur_Point({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '700'],
   display: 'swap',
 });
 
+const hubotSans = Hubot_Sans({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -33,7 +44,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={dmSans.className}>
+      <body className={hankenGrotesk.className}>
         {/* Desktop Layout */}
         <div className="hidden lg:block">
           <Header />
