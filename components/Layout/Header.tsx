@@ -2,10 +2,21 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import SearchBar from '@/components/UI/SearchBar';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const [cartCount, setCartCount] = useState(0);
+
+  const handleWishlistClick = () => {
+    router.push('/wishlist');
+  };
+
+  const handleCartClick = () => {
+    router.push('/cart');
+  };
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -47,19 +58,27 @@ const Header = () => {
             </div>
             
             {/* Wishlist */}
-            <button className="p-2 text-black hover:text-gray-600 smooth-transition">
+            <button 
+              onClick={handleWishlistClick}
+              className="p-2 text-black hover:text-gray-600 smooth-transition"
+              aria-label="Wishlist"
+            >
               <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
 
             {/* Cart */}
-            <button className="p-2 text-black hover:text-gray-600 smooth-transition relative">
+            <button 
+              onClick={handleCartClick}
+              className="p-2 text-black hover:text-gray-600 smooth-transition relative"
+              aria-label="Shopping Cart"
+            >
               <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 7H6L5 9z" />
               </svg>
               <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 md:h-5 md:w-5 flex items-center justify-center font-medium">
-                0
+                {cartCount}
               </span>
             </button>
 

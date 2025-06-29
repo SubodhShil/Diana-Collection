@@ -1,5 +1,7 @@
 import React from 'react';
 
+'use client';
+
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';

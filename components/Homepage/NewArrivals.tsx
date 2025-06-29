@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/UI/ProductCard';
 import Button from '@/components/UI/Button';
 
@@ -17,6 +18,11 @@ interface Product {
 
 const NewArrivals = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const router = useRouter();
+
+  const handleViewAllProducts = () => {
+    router.push('/categories');
+  };
 
   const sampleProducts: Product[] = [
     {
@@ -161,7 +167,10 @@ const NewArrivals = () => {
 
         {/* View All Button */}
         <div className="text-center mb-12 md:mb-16">
-          <button className="btn-primary px-6 md:px-8 py-2 md:py-3 text-sm md:text-base">
+          <button 
+            onClick={handleViewAllProducts}
+            className="btn-primary px-6 md:px-8 py-2 md:py-3 text-sm md:text-base"
+          >
             View All Products →
           </button>
         </div>

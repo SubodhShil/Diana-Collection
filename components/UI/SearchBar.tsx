@@ -1,15 +1,24 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle search logic here
-    console.log('Searching for:', searchQuery);
+    if (searchQuery.trim()) {
+      // Navigate to search results page
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const handleQuickSearch = (query: string) => {
+    setSearchQuery(query);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Category {
   id: string;
@@ -13,6 +14,13 @@ interface Category {
 }
 
 const CategoryGrid = () => {
+  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+  const router = useRouter();
+
+  const handleViewAllCollections = () => {
+    router.push('/categories');
+  };
+
   const categories = [
     {
       id: 1,
@@ -132,7 +140,10 @@ const CategoryGrid = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-8 md:mt-12 mobile-px-4">
-          <button className="btn-primary rounded-full px-6 md:px-8 py-3">
+          <button 
+            onClick={handleViewAllCollections}
+            className="btn-primary rounded-full px-6 md:px-8 py-3"
+          >
             View All Collections
           </button>
         </div>

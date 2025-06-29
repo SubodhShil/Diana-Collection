@@ -1,3 +1,5 @@
+Developed, designed, and managed by "**Subodh Chandra Shil**". 
+
 Important libraries
 
 1. Form handling with React Hook Form
