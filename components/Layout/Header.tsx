@@ -34,7 +34,7 @@ const Header = () => {
               <Image
                 src="/logo.png"
                 alt="Diana Collection"
-                width={160}
+                width={180}
                 height={50}
                 priority
               />

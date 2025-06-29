@@ -44,7 +44,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={hankenGrotesk.className}>
+      <body className={hubotSans.className}>
         {/* Desktop Layout */}
         <div className="hidden lg:block">
           <Header />
