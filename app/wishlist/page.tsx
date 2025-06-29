@@ -7,7 +7,7 @@ import ProductCard from '@/components/UI/ProductCard';
 export default function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState<any[]>([
     {
-      id: 1,
+      id: '1',
       name: 'Organic Cotton Baby Onesie',
       price: 24.99,
       originalPrice: 29.99,
@@ -20,7 +20,7 @@ export default function WishlistPage() {
       inStock: true
     },
     {
-      id: 2,
+      id: '2',
       name: 'Women\'s Elegant Dress',
       price: 89.99,
       category: 'Women',
@@ -33,21 +33,21 @@ export default function WishlistPage() {
     }
   ]);
 
-  const handleRemoveFromWishlist = (productId: number) => {
+  const handleRemoveFromWishlist = (productId: string) => {
     setWishlistItems(prev => prev.filter(item => item.id !== productId));
   };
 
-  const handleAddToCart = (productId: number) => {
+  const handleAddToCart = (productId: string) => {
     console.log('Added to cart:', productId);
     // Add cart functionality here
   };
 
-  const handleQuickView = (productId: number) => {
+  const handleQuickView = (productId: string) => {
     console.log('Quick view:', productId);
     // Add quick view functionality here
   };
 
-  const handleMoveToCart = (productId: number) => {
+  const handleMoveToCart = (productId: string) => {
     handleAddToCart(productId);
     handleRemoveFromWishlist(productId);
   };
@@ -103,7 +103,6 @@ export default function WishlistPage() {
                       onAddToCart={handleAddToCart}
                       onAddToWishlist={() => handleRemoveFromWishlist(product.id)}
                       onQuickView={handleQuickView}
-                      isInWishlist={true}
                     />
                     
                     {/* Wishlist Actions */}
