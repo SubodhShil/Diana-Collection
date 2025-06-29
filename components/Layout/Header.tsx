@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import SearchBar from '@/components/UI/SearchBar';
 
 const Header = () => {
@@ -33,8 +34,15 @@ const Header = () => {
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-xl md:text-2xl font-semibold text-black hover:text-gray-600 smooth-transition">
-              Diana Collection
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="Diana Collection"
+                width={280}
+                height={120}
+                className="h-10 md:h-20 w-auto"
+                priority
+              />
             </Link>
           </div>
 
