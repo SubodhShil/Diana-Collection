@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const HeroSection = () => {
   const router = useRouter();
@@ -51,85 +52,132 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 6000); // Change slide every 6 seconds
 
     return () => clearInterval(interval);
   }, [featuredProducts.length]);
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? featuredProducts.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
-    <section className="relative h-[85vh] min-h-[650px] bg-black text-white flex items-center justify-center text-center overflow-hidden">
-      {/* Background Image Carousel */}
-      <div className="absolute inset-0 z-0">
-        {featuredProducts.map((product, index) => (
-          <div
-            key={product.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+    <section className="relative h-screen bg-gray-100 overflow-hidden">
+      {/* Carousel Container */}
+      <div className="relative h-full">
+        {/* Background Image Carousel */}
+        <div className="absolute inset-0 z-0">
+          {featuredProducts.map((product, index) => (
+            <div
+              key={product.id}
+              className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                index === currentIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
               }`}
-          >
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
-          </div>
-        ))}
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 px-4 w-full max-w-4xl text-center">
-        {featuredProducts.map((product, index) => (
-          <div
-            key={product.id}
-            className={`transition-all duration-1000 ease-in-out ${index === currentIndex
-                ? 'opacity-100'
-                : 'opacity-0 absolute top-0 left-1/2 -translate-x-1/2 w-full'
-              }`}
-          >
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
-              style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.6)' }}
             >
-              {product.headline}
-            </h1>
-            <p
-              className="text-lg md:text-xl max-w-3xl mx-auto mb-8"
-              style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.5)' }}
-            >
-              {product.subline}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={handleExploreCollections}
-                className="px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Explore Collections
-              </button>
-              <button
-                onClick={handleShopBabyKids}
-                className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
-              >
-                Shop Baby & Kids
-              </button>
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/50" />
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Navigation Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
-        {featuredProducts.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white'
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        {/* Content Overlay */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="text-center text-white px-4 max-w-4xl">
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.id}
+                className={`transition-all duration-700 ease-in-out ${
+                  index === currentIndex
+                    ? 'opacity-100 transform translate-y-0'
+                    : 'opacity-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full transform translate-y-4'
+                }`}
+              >
+                <div className="mb-4">
+                  <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-medium tracking-wider uppercase">
+                    Diana Collection
+                  </span>
+                </div>
+                <h1
+                  className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-light mb-6 tracking-tight leading-tight"
+                  style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+                >
+                  {product.headline}
+                </h1>
+                <p
+                  className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-8 font-light leading-relaxed"
+                  style={{ textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}
+                >
+                  {product.subline}
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    onClick={handleExploreCollections}
+                    className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+                  >
+                    Discover Collection
+                  </button>
+                  <button
+                    onClick={handleShopBabyKids}
+                    className="px-8 py-4 border-2 border-white/80 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+                  >
+                    Shop Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation Dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+          {featuredProducts.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 backdrop-blur-sm ${
+                index === currentIndex 
+                  ? 'bg-white scale-125 shadow-lg shadow-white/30' 
+                  : 'bg-white/50 hover:bg-white/80 hover:scale-110'
               }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Slide Counter */}
+        <div className="absolute bottom-8 right-8 z-20 text-white/80 text-sm font-medium backdrop-blur-sm bg-black/20 px-3 py-2 rounded-full">
+          {currentIndex + 1} / {featuredProducts.length}
+        </div>
       </div>
     </section>
   );
