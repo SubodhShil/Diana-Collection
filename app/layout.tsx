@@ -54,10 +54,7 @@ export default function RootLayout({
 
         {/* Mobile Layout */}
         <div className="lg:hidden">
-          <MobileTopNav 
-            onMenuToggle={toggleMobileMenu} 
-            isMenuOpen={isMobileMenuOpen} 
-          />
+          <MobileTopNav />
           
           {/* Main Content with proper spacing */}
           <main className="pt-14 pb-16 min-h-screen bg-gray-50">
