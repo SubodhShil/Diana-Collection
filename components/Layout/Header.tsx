@@ -27,7 +27,7 @@ const Header = () => {
           }`}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             <div className="flex items-center space-x-4">
               <Link href="/contact" className="text-sm font-medium flex items-center">
                 <Plus size={16} className="mr-1" />
