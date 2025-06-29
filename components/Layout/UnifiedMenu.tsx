@@ -33,12 +33,12 @@ const UnifiedMenu: React.FC<UnifiedMenuProps> = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const mainNavigation = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Categories', href: '/categories', icon: Grid3X3 },
-    { name: 'Baby & Kids', href: '/baby-kids', icon: '👶' },
-    { name: 'Women', href: '/women', icon: '👩' },
-    { name: 'Men', href: '/men', icon: '👨' },
-    { name: 'Accessories', href: '/accessories', icon: '👜' },
+    { name: 'Home', href: '/', icon: Home, isComponent: true },
+    { name: 'Categories', href: '/categories', icon: Grid3X3, isComponent: true },
+    { name: 'Baby & Kids', href: '/baby-kids', icon: '👶', isComponent: false },
+    { name: 'Women', href: '/women', icon: '👩', isComponent: false },
+    { name: 'Men', href: '/men', icon: '👨', isComponent: false },
+    { name: 'Accessories', href: '/accessories', icon: '👜', isComponent: false },
   ];
 
   const userActions = [
@@ -109,7 +109,6 @@ const UnifiedMenu: React.FC<UnifiedMenuProps> = ({ isOpen, onClose }) => {
               <nav className="space-y-1">
                 {mainNavigation.map((item) => {
                   const isActive = pathname === item.href;
-                  const IconComponent = typeof item.icon === 'string' ? null : item.icon;
                   
                   return (
                     <Link
@@ -123,15 +122,15 @@ const UnifiedMenu: React.FC<UnifiedMenuProps> = ({ isOpen, onClose }) => {
                       }`}
                     >
                       <div className="mr-4 flex-shrink-0">
-                        {IconComponent ? (
-                          <IconComponent 
+                        {item.isComponent ? (
+                          <item.icon 
                             size={20} 
                             className={`transition-colors ${
                               isActive ? 'text-white' : 'text-gray-500 group-hover:text-black'
                             }`} 
                           />
                         ) : (
-                          <span className="text-lg">{item.icon}</span>
+                          <span className="text-lg">{item.icon as string}</span>
                         )}
                       </div>
                       <span className="flex-1">{item.name}</span>
