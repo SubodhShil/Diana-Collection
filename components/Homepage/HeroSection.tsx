@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const HeroSection = () => {
@@ -34,7 +34,7 @@ const HeroSection = () => {
     {
       id: 3,
       name: 'Men\'s Classic Shirt',
-      image: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1924&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       headline: 'Sophisticated & Comfortable',
       subline: 'Upgrade your wardrobe with our premium menswear collection.',
     },
@@ -47,25 +47,28 @@ const HeroSection = () => {
     }
   ];
 
+  // Memoize featuredProducts to prevent recreation on every render
+  const memoizedProducts = useCallback(() => featuredProducts, []);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
-    }, 6000); // Change slide every 6 seconds
-
-    return () => clearInterval(interval);
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
   }, [featuredProducts.length]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
-  };
-
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? featuredProducts.length - 1 : prevIndex - 1
     );
-  };
+  }, [featuredProducts.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 6000); // Change slide every 6 seconds
+
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
   return (
     <section className="relative h-screen bg-gray-100 overflow-hidden">
@@ -87,6 +90,9 @@ const HeroSection = () => {
                 className="object-cover"
                 priority={index === 0}
                 sizes="100vw"
+                quality={85}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/50" />
             </div>
@@ -96,14 +102,14 @@ const HeroSection = () => {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
           aria-label="Previous slide"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
           aria-label="Next slide"
         >
           <ChevronRight size={24} />
@@ -142,13 +148,13 @@ const HeroSection = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <button
                     onClick={handleExploreCollections}
-                    className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+                    className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white/50"
                   >
                     Discover Collection
                   </button>
                   <button
                     onClick={handleShopBabyKids}
-                    className="px-8 py-4 border-2 border-white/80 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+                    className="px-8 py-4 border-2 border-white/80 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50"
                   >
                     Shop Now
                   </button>
@@ -164,7 +170,7 @@ const HeroSection = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 backdrop-blur-sm ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50 ${
                 index === currentIndex 
                   ? 'bg-white scale-125 shadow-lg shadow-white/30' 
                   : 'bg-white/50 hover:bg-white/80 hover:scale-110'

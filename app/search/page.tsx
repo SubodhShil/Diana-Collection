@@ -72,17 +72,17 @@ export default function SearchPage() {
     performSearch();
   }, [query]);
 
-  const handleAddToCart = (productId: number) => {
+  const handleAddToCart = (productId: string) => {
     console.log('Added to cart:', productId);
     // Add cart functionality here
   };
 
-  const handleAddToWishlist = (productId: number) => {
+  const handleAddToWishlist = (productId: string) => {
     console.log('Added to wishlist:', productId);
     // Add wishlist functionality here
   };
 
-  const handleQuickView = (productId: number) => {
+  const handleQuickView = (productId: string) => {
     console.log('Quick view:', productId);
     // Add quick view functionality here
   };
